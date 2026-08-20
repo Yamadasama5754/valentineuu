@@ -1941,6 +1941,23 @@ h1 {
             box-shadow: 0 8px 20px rgba(218, 112, 214, 0.6);
         }
     
+
+/* ===== SPA fix: each page's CSS is now global (previously loaded separately
+   per standalone page), so start.css/home.css/intro.css's "html, body {
+   overflow:hidden}" and "body {display:flex; align-items:center}" rules were
+   leaking into the wishes/timeline/memories pages and clipping their long,
+   scrollable content. Restore normal scrollable block layout for those. ===== */
+html { overflow-y: auto !important; }
+body[data-page="wishes"],
+body[data-page="timeline"],
+body[data-page="memories"] {
+    display: block !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    height: auto !important;
+    min-height: 100vh;
+}
+
 </style>
 </head>
 <body data-page="start">
